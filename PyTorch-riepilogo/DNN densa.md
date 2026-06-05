@@ -179,7 +179,7 @@ def eval_loop(model, dataloader, device,
             y_pred.extend(pred.argmax(1).cpu().numpy())
 
             # ← AGGIUNGERE — scegli in base al task:
-            y_score.extend(torch.exp(pred).detach().tolist())         # multiclasse
+            y_score.extend(torch.exp(pred).cpu().numpy())         # multiclasse
             # y_score.extend(torch.exp(pred)[:, 1].detach().tolist()) # binario (prob. classe positiva)
 
     test_loss /= num_batches
