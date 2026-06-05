@@ -293,7 +293,7 @@ valgono in entrambi i casi di classificazione.
 ```python
 class ReteDensa(nn.Module):
     def __init__(self, input_dim, output_dim):
-        super(ReteDensa, self).__init__()
+        super().__init__()
         self.network = nn.Sequential(
             nn.Linear(input_dim, 128),
             nn.ReLU(),
