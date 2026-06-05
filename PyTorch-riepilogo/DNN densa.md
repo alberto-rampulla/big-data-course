@@ -313,10 +313,11 @@ class ReteDensa(nn.Module):
         return self.network(x)            # niente squeeze per classificazione
 ```
 
-### CNN (rete convoluzionale Con1d)
+### CNN (rete convoluzionale Conv1d)
 
 Con padding "same" (`padding = (kernel_size-1)//2`) la lunghezza resta invariata
 dopo ogni Conv1d. Solo il MaxPool dimezza: `flat_dim = out_channels * (input_dim // 2)`.
+Su questa parte non ho fatto esercitazioni, approfondisci tu per avere contezza di come diminuisce la dimensionalità dei batch.
 
 ```python
 class ReteConv1d(nn.Module):
@@ -333,7 +334,7 @@ class ReteConv1d(nn.Module):
             nn.ReLU(),
             nn.Conv1d(in_channels=32, out_channels=64, kernel_size=3, padding=1),
             nn.ReLU(),
-            nn.MaxPool1d(kernel_size=2),
+            nn.MaxPool1d(kernel_size=2), # o AvgPool1d(2)
             # blocco denso
             nn.Flatten(),
             nn.Linear(flat_dim, 16),
@@ -371,7 +372,7 @@ summary(model)
 ## PASSO 14 — `EarlyStopping`
 
 ```python
-es = EarlyStopping(patience=config["patience"], min_delta=config["min_delta"])
+es = EarlyStopping()
 ```
 
 ---
